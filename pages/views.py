@@ -640,7 +640,7 @@ def index(request):
         'health3_content':health3_content,
     }
 
-
-
-
     return render(request, 'pages/index.html', context)
+
+def about(request):
+    return render(request, 'pages/about.html')
