@@ -16,24 +16,27 @@
 
     <!-- ********** Hero Area Start ********** -->
     <div class="hero-area">
-
+      {% for item in francois %}
         <!-- Hero Slides Area -->
         <div class="hero-slides owl-carousel">
             <!-- Single Slide -->
-            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({% static 'img/toronto.jpg' %});"></div>
+            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images1.url}});"></div>
 
-            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({% static 'img/toronto2.jpg' %});"></div>
+            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images2.url}});"></div>
 
-            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({% static 'img/london.jpg' %});"></div>
+            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images3.url}});"></div>
 
-            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({% static 'img/hong_kong.jpg' %});"></div>
+            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images4.url}});"></div>
 
             <!-- Single Slide -->
-            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({% static 'img/brooklyn.jpg' %});"></div>
+            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images5.url}});"></div>
 
-            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({% static 'img/skyline.jpg' %});"></div>
+            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images6.url}});"></div>
 
-            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({% static 'img/sky2.jpg' %});"></div>
+            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images7.url}});"></div>
+
+            <div class="single-hero-slide bg-img background-overlay" style="background-image: url({{item.home_images8.url}});"></div>
+        {% endfor %}
         </div>
 
         <!-- Hero Post Slide -->

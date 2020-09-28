@@ -6,6 +6,7 @@ from yahoo_fin.stock_info import *
 from requests_html import HTMLSession
 import newsapi as np
 from newsapi import NewsApiClient
+from .models import Francois
 newsapi = NewsApiClient(api_key='675e79029f9440db99995410d40edebb')
 
 # Create your views here.
@@ -448,6 +449,7 @@ def index(request):
     nikkei_perc = nikkei['changesPercentage']
     nikkei_dollar = nikkei['change']
 
+    francois = Francois.objects.all()
 
     context = {
         'vix_name':vix_name,
@@ -638,9 +640,17 @@ def index(request):
         'health3_image':health3_image,
         'health3_des':health3_des,
         'health3_content':health3_content,
+        'francois':francois,
     }
 
     return render(request, 'pages/index.html', context)
 
 def about(request):
-    return render(request, 'pages/about.html')
+    francois = Francois.objects.all()
+    data = {
+        'francois':francois,
+    }
+    return render(request, 'pages/about.html', data)
+
+def contact(request):
+    return render(request, 'pages/contact.html')

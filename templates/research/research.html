@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Preloader Start -->
+    <div id="preloader">
+        <div class="preload-content">
+            <div id="world-load"></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <!-- ***** Header Area Start ***** -->
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ********** Hero Area Start ********** -->
+    <div class="hero-area height-600 bg-img background-overlay" style="background-image: url({% static 'img/research2.jpg'%});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="single-blog-title text-center">
+                        <!-- Catagory -->
+                        <h1 style="color: white; font-size: 52px;">Fintank</h1>
+                        <p style="color: white;  font-size: 28px;">Your Portfolio Just Got Easier To Manage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ********** Hero Area End ********** -->
+
+    <div class="main-content-wrapper section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area ============= -->
+
+                <div class="col-12 col-lg-12">
+                    <div class="single-blog-content mb-100">
+                        <!-- Post Meta -->
+                        <div class="post-meta">
+                          <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item">
+                                  <a href="{% url 'index'%}">
+                                    <i class="fas fa-home"></i> Home</a> &nbsp; &nbsp; &nbsp; | {{ ticker_name | safe }} &nbsp; |  YTD: {{ ytd | safe }}  &nbsp; |  Beta: {{ beta | safe }} &nbsp; |  Price: ${{ live_price | safe }} {{ ticker_currency | safe }} &nbsp; |  Sector: {{ sector | safe }} &nbsp; |  Exchange: {{ ticker_exchange | safe }}
+                              </li>
+                            </ol>
+                          </nav>
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            {{ script1 | safe }}
+                            {{ div1 | safe }}
+                            {{ ticker_info | safe }}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-lg-8">
+                    <div class="single-blog-content mb-100">
+                        <!-- Post Meta -->
+                        <div class="post-meta">
+                            <p>{{ ticker_name | safe }} Characteristic Rankings</p>
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                          {{ script2 | safe }}
+                          {{ div2 | safe }}
+                          {{ script3 | safe }}
+                          {{ div3 | safe }}
+                          {{ script4 | safe }}
+                          {{ div4 | safe }}
+                          {{ script5 | safe }}
+                          {{ div5 | safe }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== Sidebar Area ========== -->
+                <div class="col-12 col-md-8 col-lg-4">
+                    <div class="post-sidebar-area mb-100">
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">{{ticker_name|safe}}</h5>
+                            <div class="widget-content">
+                                <p>{{profile|safe}}</p>
+                            </div>
+                        </div>
+                        <!-- Widget Area -->
+                        <!-- Widget Area -->
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Today’s Pick</h5>
+                            <div class="widget-content">
+                                <!-- Single Blog Post -->
+                                <div class="single-blog-post todays-pick">
+                                    <!-- Post Thumbnail -->
+                                    <div class="post-thumbnail">
+                                        <img src="{{ image | safe }}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============== Related Post ============== -->
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article1_image|safe}}" alt="">
+                            <!-- Catagory -->
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <a href="{{article1_url}}" class="headline">
+                                <h5>{{article1|safe}}</h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <p><a href="#" class="post-author">{{article1_site|safe}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article2_image|safe}}" alt="">
+                            <!-- Catagory -->
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <a href="{{article2_url}}" class="headline">
+                                <h5>{{article2|safe}}</h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <p><a href="#" class="post-author">{{article2_site|safe}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article3_image|safe}}" alt="">
+                            <!-- Catagory -->
+                            <!-- Video Button -->
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <a href="{{article3_url}}" class="headline">
+                                <h5>{{article3|safe}}</h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <p><a href="#" class="post-author">{{article3_site|safe}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article4_image|safe}}" alt="">
+                            <!-- Catagory -->
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <a href="{{article4_url}}" class="headline">
+                                <h5>{{article4|safe}}</h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <p><a href="#" class="post-author">{{article4_site|safe}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article5_image|safe}}" alt="">
+                            <!-- Catagory -->
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <a href="{{article5_url}}" class="headline">
+                                <h5>{{article5|safe}}</h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <p><a href="#" class="post-author">{{article5_site|safe}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article6_image|safe}}" alt="">
+                            <!-- Catagory -->
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <a href="{{article6_url}}" class="headline">
+                                <h5>{{article6|safe}}</h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <p><a href="#" class="post-author">{{article6_site|safe}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article7_image|safe}}" alt="">
+                            <!-- Catagory -->
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <a href="{{article7_url}}" class="headline">
+                                <h5>{{article7|safe}}</h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <p><a href="#" class="post-author">{{article7_site|safe}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article8_image|safe}}" alt="">
+                            <!-- Catagory -->
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <a href="{{article8_url}}" class="headline">
+                                <h5>{{article8|safe}}</h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <p><a href="#" class="post-author">{{article8_site|safe}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4">
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post">
+                        <!-- Post Thumbnail -->
+                        <div class="post-thumbnail">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article9_image|safe}}" alt="">
+                            <!-- Catagory -->
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            <a href="{{article9_url}}" class="headline">
+                                <h5>{{article9|safe}}</h5>
+                            </a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <p><a href="#" class="post-author">{{article9_site|safe}}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area ============= -->
+
+                <div class="col-12 col-lg-12">
+                          <h6>Sector Performance</h6>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            {{ script6 | safe }}
+                            {{ div6 | safe }}
+                        </div>
+                </div>
+        </div>
+    </div>
+  </div>
+
+    <!-- ***** Footer Area Start ***** -->
+  {% endblock %}
