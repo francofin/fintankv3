@@ -45,10 +45,10 @@
                    <hr class="my-4">
 
                    <div class="row">
+                     <form action="{% url 'screener' %}"class="form-inline my-2 my-lg-0" method='POST'>
+                       {% csrf_token %}
                    <div class = "col-md-6">
                      <p>Please select an Industry Below.</p>
-                     <form action=""class="form-inline my-2 my-lg-0" method='POST'>
-                       {% csrf_token %}
                          <div class="input-group mb-3">
                        <div class="input-group-prepend">
                          <button class="btn btn-secondary" type="submit" name='option'>Search</button>
@@ -69,27 +69,23 @@
                          <option value="ETFs">ETFs</option>
                        </select>
                      </div>
-                     </form>
                    </div>
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                      <p>Please specify a Market Capital</p>
-                     <form action=""class="form-inline my-2 my-lg-0" method='POST'>
-                       {% csrf_token %}
-                         <div class="input-group mb-3">
-                       <div class="input-group-prepend">
-                         <button class="btn btn-secondary" type="submit" name='option'>Search</button>
-                       </div>
-                       <select name ='option' class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+                     <div class="input-group mb-3">
+                       <select name ='option2' class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
                          <option selected>Choose</option>
-                         <option value="Healthcare">Mega and Large Cap</option>
-                         <option value="Technology">Mid Cap</option>
-                         <option value="Industrials">Small Cap</option>
+                         <option value="200000000000">Mega Cap</option>
+                         <option value="10000000000">Large Cap</option>
+                         <option value="2000000000">Mid Cap</option>
+                         <option value="300000000">Small Cap</option>
+                         <option value="50000000">Micro Cap</option>
                        </select>
                      </div>
-                     </form>
-                     </div>
+                  </form>
+                 </div>
 
-                   </div>
+                </div>
 
 
                 <div class="col-12 col-lg-8">
@@ -100,19 +96,7 @@
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
-                          {{ script2 | safe }}
-                          {{ div2 | safe }}
-                          {{ script3 | safe }}
-                          {{ div3 | safe }}
-                          {{ script4 | safe }}
-                          {{ div4 | safe }}
-                          {{ script5 | safe }}
-                          {{ div5 | safe }}
-                          {{ script7 | safe }}
-                          {{ div7 | safe }}
-                          {% if message %}
-                            {{ message }}
-                          {% endif %}
+                          {{ screen_df | safe }}
                         </div>
                     </div>
                 </div>

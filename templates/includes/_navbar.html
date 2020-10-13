@@ -32,12 +32,12 @@
                                 <a class="nav-link" href="{% url 'research' %}">Research</a>
                             </li>
                             <li
-                            {% if 'screener' in request.path %}
+                            {% if 'screen' in request.path %}
                             class="nav-item active"
                             {% else %}
                             class="nav-item"
                             {% endif %}>
-                                <a class="nav-link" href="{% url 'screener' %}">Screener</a>
+                                <a class="nav-link" href="{% url 'screen' %}">Screener</a>
                             </li>
                             <li
                                 {% if 'lifestyle' in request.path %}
