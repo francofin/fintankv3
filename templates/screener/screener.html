@@ -35,26 +35,61 @@
                 <!-- ============= Post Content Area ============= -->
 
                 <div class="col-12 col-lg-12">
-                    <div class="single-blog-content mb-100">
-                        <!-- Post Meta -->
-                        <div class="post-meta">
-                          <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                              <li class="breadcrumb-item">
-                                  <a href="{% url 'index'%}">
-                                    <i class="fas fa-home"></i> Home</a> &nbsp; &nbsp; &nbsp; | {{ ticker_name | safe }} &nbsp; |  YTD: {{ ytd | safe }}  &nbsp; |  Beta: {{ beta | safe }} &nbsp; |  Price: ${{ live_price | safe }} {{ ticker_currency | safe }} &nbsp; |  Sector: {{ sector | safe }} &nbsp; |  Exchange: {{ ticker_exchange | safe }}
-                              </li>
-                            </ol>
-                          </nav>
-                        </div>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            {{ script1 | safe }}
-                            {{ div1 | safe }}
-                            {{ ticker_info | safe }}
-                        </div>
-                    </div>
-                </div>
+
+
+               <div class="row justify-content-md-center row-eq-height">
+
+                 <div class="jumbotron">
+                   <h1 class="display-4">Industry Research</h1>
+                   <p class="lead">Industry grouping is based on a subset of the Industry's Universe based on stocks from the S&P 500, Dow Jones Industrial Average and the Nasdaq Composite.</p>
+                   <hr class="my-4">
+
+                   <div class="row">
+                   <div class = "col-md-6">
+                     <p>Please select an Industry Below.</p>
+                     <form action=""class="form-inline my-2 my-lg-0" method='POST'>
+                       {% csrf_token %}
+                         <div class="input-group mb-3">
+                       <div class="input-group-prepend">
+                         <button class="btn btn-secondary" type="submit" name='option'>Search</button>
+                       </div>
+                       <select name ='option' class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+                         <option selected>Choose </option>
+                         <option value="Healthcare">Healthcare</option>
+                         <option value="Technology">Technology</option>
+                         <option value="Industrials">Industrials</option>
+                         <option value="Utilities">Utilities</option>
+                         <option value="Consumer Discretionary">Consumer Discretionary</option>
+                         <option value="Financials">Financials</option>
+                         <option value="Basic Materials">Basic Materials</option>
+                         <option value="Consumer Cyclical">Consumer Cyclical</option>
+                         <option value="Communications">Communication</option>
+                         <option value="Real Estate">Real Estate</option>
+                         <option value="Energy">Energy</option>
+                         <option value="ETFs">ETFs</option>
+                       </select>
+                     </div>
+                     </form>
+                   </div>
+                   <div class="col-md-4">
+                     <p>Please specify a Market Capital</p>
+                     <form action=""class="form-inline my-2 my-lg-0" method='POST'>
+                       {% csrf_token %}
+                         <div class="input-group mb-3">
+                       <div class="input-group-prepend">
+                         <button class="btn btn-secondary" type="submit" name='option'>Search</button>
+                       </div>
+                       <select name ='option' class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+                         <option selected>Choose</option>
+                         <option value="Healthcare">Mega and Large Cap</option>
+                         <option value="Technology">Mid Cap</option>
+                         <option value="Industrials">Small Cap</option>
+                       </select>
+                     </div>
+                     </form>
+                     </div>
+
+                   </div>
 
 
                 <div class="col-12 col-lg-8">

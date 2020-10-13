@@ -31,8 +31,23 @@
                                 {% endif %}>
                                 <a class="nav-link" href="{% url 'research' %}">Research</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Stocks/Sectors</a>
+                            <li
+                            {% if 'screener' in request.path %}
+                            class="nav-item active"
+                            {% else %}
+                            class="nav-item"
+                            {% endif %}>
+                                <a class="nav-link" href="{% url 'screener' %}">Screener</a>
+                            </li>
+                            <li
+                                {% if 'lifestyle' in request.path %}
+                                class="nav-item active"
+                                {% else %}
+                                class="nav-item"
+                                {% endif %}>
+                                <a
+                                class="nav-link"
+                                href="{% url 'lifestyle' %}">Lifestyle</a>
                             </li>
                             <li
                                 {% if 'about' in request.path %}
@@ -60,8 +75,10 @@
                         </ul>
                         <!-- Search Form  -->
                         <div id="search-wrapper">
-                            <form action="#">
-                                <input type="text" id="search" placeholder="Search something...">
+                            <form action="{% url 'stock_search' %}" method='POST'>
+                                  {% csrf_token %}
+                                  {{ form.as_p }}
+                                <input type="text" id="search" placeholder="Search ticker" name='ticker'>
                                 <div id="close-icon"></div>
                                 <input class="d-none" type="submit" value="">
                             </form>

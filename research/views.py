@@ -99,7 +99,7 @@ def research(request):
     ticker_info = dataframe_clean.sort_values(by=['date'], ascending=False).style.format('{:,.2f}').set_table_attributes("class='table table-sm table-striped table-bordered table-hover'").render()
     ytd_eqn = (pd.DataFrame(json.loads(requests.get(f'https://fmpcloud.io/api/v3/historical-price-full/'+str(ticker_request)+'?from=2020-01-01&to='+end_date+'&apikey='+api).content)['historical']).set_index('date').iloc[::-1])
     symbol_chart['dates'] = pd.to_datetime(symbol_chart.index, format=date_format)
-    ytd_formula = (ytd_eqn['adjClose'][-1]/ytd_eqn['adjClose'].loc['2020-01-02'] - 1)*100
+    ytd_formula = (ytd_eqn['adjClose'][-1]/ytd_eqn['adjClose'].iloc[0] - 1)*100
     ytd = format(ytd_formula, '.2f')+"%"
     # line chart
     TOOLTIPS = [("Price", "@y{$0.2f}")]
@@ -112,9 +112,22 @@ def research(request):
     cdn_css = CDN.css_files
 
     # stock profile
+
     stock_profile = json.loads(requests.get(f'https://fmpcloud.io/api/v3/profile/'+str(ticker_request)+'?apikey=3da6aaea4ffa4232c7ada6b09e15af62').content)
     profile = stock_profile[0]['description']
     sector = stock_profile[0]['sector']
+    if sector == None:
+        url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-profile"
+        querystring = {"region":"US","symbol":"GAZP.ME"}
+        headers = {
+            'x-rapidapi-host': "apidojo-yahoo-finance-v1.p.rapidapi.com",
+            'x-rapidapi-key': "feec356023msh7d505f582747ea5p199c91jsnd5a1909fc40a"
+            }
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        sector = json.loads(response.content)['assetProfile']['sector']
+    else:
+        sector = sector
+
     image = stock_profile[0]['image']
     try:
         beta = format(stock_profile[0]['beta'], ".2f")
@@ -372,6 +385,87 @@ def research(request):
         article9_image = news[8]['image']
 
 
+    # ratings
+
+    def get_ratings(stock):
+        grades = json.loads(requests.get(f'https://fmpcloud.io/api/v3/grade/'+stock+'?limit=500&apikey=3da6aaea4ffa4232c7ada6b09e15af62').content)
+        grade_df = pd.DataFrame(grades)
+        outperform = 0
+        buy = 0
+        strong_buy = 0
+        neutral = 0
+        underperform = 0
+        sell = 0
+        positive = 0
+        negative = 0
+        other = 0
+        i = 0
+        while i < len(grade_df['newGrade']):
+            if grade_df['newGrade'][i] == 'Outperform':
+                outperform+=1
+            elif grade_df['newGrade'][i] == 'Buy':
+                buy+=1
+            elif grade_df['newGrade'][i] == 'Strong Buy':
+                buy+=1
+            elif grade_df['newGrade'][i] == 'Neutral':
+                neutral+=1
+            elif grade_df['newGrade'][i] == 'Underperform':
+                underperform+=1
+            elif grade_df['newGrade'][i] == 'Sell':
+                sell+=1
+            elif grade_df['newGrade'][i] == 'Positive':
+                positive+=1
+            elif grade_df['newGrade'][i] == 'Negative':
+                positive+=1
+            else:
+                other+=1
+            i+=1
+        grade_list = [outperform, buy, strong_buy, positive, neutral, underperform, sell, negative, other]
+        ratings = ['Outperform', 'Buy', 'Strong Buy', 'Positive', 'Neutral', 'Underperform', 'Sell', 'Negative', 'Other']
+        return grade_list, ratings
+
+    # recommendations
+    def analyst_recommendations(stock):
+        recommendations = json.loads(requests.get(f'https://fmpcloud.io/api/v3/analyst-stock-recommendations/'+stock+'?limit=60&apikey=3da6aaea4ffa4232c7ada6b09e15af62').content)
+        rec_df = pd.DataFrame(recommendations).set_index('date').drop('symbol', axis=1).iloc[::-1]
+
+        return rec_df
+
+    message0 = 'Ratings Not Available for Stock'
+    message1 = 'Other Includes Ratings such os overweight, underweight, sector weight, reduce, perform and market outperform.'
+    try:
+        stock_grades = get_ratings(ticker_request)
+        grades = stock_grades[0]
+        analyst_ratings = stock_grades[1]
+
+        data = {
+            'ratings':analyst_ratings,
+            'grade':grades
+            }
+        rating_chart = figure(x_range=analyst_ratings, plot_height=250, title="Stock Grade",
+                   toolbar_location=None, tools="hover", tooltips="@ratings: @grade")
+        rating_chart.vbar(x='ratings', top='grade', source=data, width=0.9)
+        rating_chart.y_range.start = 0
+        script7, div7 = components(rating_chart)
+        message = message1
+        cdn_js = CDN.js_files
+        cdn_css = CDN.css_files
+    except:
+        grades = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        analyst_ratings = ['Outperform', 'Buy', 'Strong Buy', 'Positive', 'Neutral', 'Underperform', 'Sell', 'Negative', 'Other']
+        data = {
+            'ratings':analyst_ratings,
+            'grade':grades
+            }
+        rating_chart = figure(x_range=analyst_ratings, plot_height=250, title="Stock Grade",
+                   toolbar_location=None, tools="hover", tooltips="@ratings: @grade")
+        rating_chart.vbar(x='ratings', top='grade', source=data, width=0.9)
+        rating_chart.y_range.start = 0
+        message = message0
+        script7, div7 = components(rating_chart)
+        cdn_js = CDN.js_files
+        cdn_css = CDN.css_files
+
 
 
     data = {
@@ -395,6 +489,9 @@ def research(request):
         'div5':div5,
         'script6':script6,
         'div6':div6,
+        'script7':script7,
+        'div7':div7,
+        'message':message,
         'ticker_info':ticker_info,
         'image':image,
         'ytd':ytd,

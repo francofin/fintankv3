@@ -42,7 +42,7 @@
                             <ol class="breadcrumb">
                               <li class="breadcrumb-item">
                                   <a href="{% url 'index'%}">
-                                    <i class="fas fa-home"></i> Home</a> &nbsp; &nbsp; &nbsp; | {{ ticker_name | safe }} &nbsp; |  YTD: {{ ytd | safe }}  &nbsp; |  Beta: {{ beta | safe }} &nbsp; |  Price: ${{ live_price | safe }} {{ ticker_currency | safe }} &nbsp; |  Sector: {{ sector | safe }} &nbsp; |  Exchange: {{ ticker_exchange | safe }}
+                                    <i class="fas fa-home"></i> Home</a> &nbsp; &nbsp; &nbsp; | {{ ticker_name | safe }} &nbsp; |  YTD: {{ ytd | safe }}  &nbsp; |  Beta: {{ beta | safe }} &nbsp; |  Price: ${{ live_price | safe }} &nbsp; |  Sector: {{ sector | safe }} &nbsp; |  Exchange: {{ ticker_exchange | safe }}
                               </li>
                             </ol>
                           </nav>
@@ -82,6 +82,7 @@
                     </div>
                 </div>
 
+
                 <!-- ========== Sidebar Area ========== -->
                 <div class="col-12 col-md-8 col-lg-4">
                     <div class="post-sidebar-area mb-100">
@@ -111,6 +112,18 @@
                 </div>
             </div>
 
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area ============= -->
+
+                <div class="col-12 col-lg-12">
+                          <h6>Analyst Recommendations</h6>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                          {{ script8 | safe }}
+                          {{ div8 | safe }}
+                        </div>
+                </div>
+        </div>
 
             <!-- ============== Related Post ============== -->
             <div class="row">
