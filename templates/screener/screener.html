@@ -40,7 +40,7 @@
                <div class="row justify-content-md-center row-eq-height">
 
                  <div class="jumbotron">
-                   <h1 class="display-4">Industry Research</h1>
+                   <h1 class="display-4">Industry Research & Screener</h1>
                    <p class="lead">Industry grouping is based on a subset of the Industry's Universe based on stocks from the S&P 500, Dow Jones Industrial Average and the Nasdaq Composite.</p>
                    <hr class="my-4">
 
@@ -54,16 +54,16 @@
                          <button class="btn btn-secondary" type="submit" name='option'>Search</button>
                        </div>
                        <select name ='option' class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-                         <option selected>Choose </option>
+                         <option value=''>Choose </option>
                          <option value="Healthcare">Healthcare</option>
                          <option value="Technology">Technology</option>
                          <option value="Industrials">Industrials</option>
                          <option value="Utilities">Utilities</option>
-                         <option value="Consumer Discretionary">Consumer Discretionary</option>
-                         <option value="Financials">Financials</option>
+                         <option value="Consumer Cyclical">Consumer Discretionary</option>
+                         <option value="Financial">Financials</option>
                          <option value="Basic Materials">Basic Materials</option>
-                         <option value="Consumer Cyclical">Consumer Cyclical</option>
-                         <option value="Communications">Communication</option>
+                         <option value="Consumer Defensive">Consumer Staples</option>
+                         <option value="Communication Services">Communication</option>
                          <option value="Real Estate">Real Estate</option>
                          <option value="Energy">Energy</option>
                          <option value="ETFs">ETFs</option>
@@ -74,7 +74,7 @@
                      <p>Please specify a Market Capital</p>
                      <div class="input-group mb-3">
                        <select name ='option2' class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-                         <option selected>Choose</option>
+                         <option value=''>Choose</option>
                          <option value="200000000000">Mega Cap</option>
                          <option value="10000000000">Large Cap</option>
                          <option value="2000000000">Mid Cap</option>
@@ -88,47 +88,32 @@
                 </div>
 
 
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-lg-12">
                     <div class="single-blog-content mb-100">
                         <!-- Post Meta -->
-                        <div class="post-meta">
-                            <p>{{ ticker_name | safe }} Characteristic Rankings</p>
+                        <div class="post-meta" style="padding-top: 20px;">
+                          <h5> Sector Performances</h5>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
+                          {{ script6 | safe }}
+                          {{ div6 | safe }}
+                          <div class="post-meta" style="padding-top: 50px;">
+
+                            <h5>Search Results:
+                                {% if sector %}
+                                 {{ sector | safe}}, Showing: {{ length | safe }}
+                                 {% else %}
+                                  {{ length | safe }}</h5>
+                            {% endif %}
+                          </div>
                           {{ screen_df | safe }}
                         </div>
                     </div>
                 </div>
 
                 <!-- ========== Sidebar Area ========== -->
-                <div class="col-12 col-md-8 col-lg-4">
-                    <div class="post-sidebar-area mb-100">
-                        <!-- Widget Area -->
-                        <div class="sidebar-widget-area">
-                            <h5 class="title">{{ticker_name|safe}}</h5>
-                            <div class="widget-content">
-                                <p>{{profile|safe}}</p>
-                            </div>
-                        </div>
-                        <!-- Widget Area -->
-                        <!-- Widget Area -->
-                        <!-- Widget Area -->
-                        <div class="sidebar-widget-area">
-                            <h5 class="title">Today’s Pick</h5>
-                            <div class="widget-content">
-                                <!-- Single Blog Post -->
-                                <div class="single-blog-post todays-pick">
-                                    <!-- Post Thumbnail -->
-                                    <div class="post-thumbnail">
-                                        <img src="{{ image | safe }}" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
 
             <!-- ============== Related Post ============== -->
@@ -327,15 +312,6 @@
             </div>
             <div class="row justify-content-center">
                 <!-- ============= Post Content Area ============= -->
-
-                <div class="col-12 col-lg-12">
-                          <h6>Sector Performance</h6>
-                        <!-- Post Content -->
-                        <div class="post-content">
-                            {{ script6 | safe }}
-                            {{ div6 | safe }}
-                        </div>
-                </div>
         </div>
     </div>
   </div>
