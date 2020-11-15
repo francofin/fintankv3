@@ -141,7 +141,7 @@ def lifestyle(request):
     lifestyle_name = lifestyle['data']['results'][0]['title']
     lifestyle_url = lifestyle['data']['results'][0]['url']
     lifestyle_image = lifestyle1
-    lifestyle_description = lifestyle['data']['results'][0]['description']
+    # lifestyle_description = lifestyle['data']['results'][0]['description']
     lifestyle_source = lifestyle['data']['results'][1]['url'].split('/')[2]
 
     opinion_name = opinion['data']['results'][0]['title']
@@ -361,27 +361,33 @@ def lifestyle(request):
     # gadgets_description = gadgets['description']
     # gadgets_source = gadgets['provider'][0]['name']
 
-    gainers = get_day_gainers()
+    gainers = json.loads(requests.get(f"https://fmpcloud.io/api/v3/gainers?apikey=3da6aaea4ffa4232c7ada6b09e15af62").content)
 
-    gainer1 = gainers.iloc[0]['Name']
-    gainer1_price = gainers.iloc[0]['Price (Intraday)']
-    gainer1_change = gainers.iloc[0]['% Change']
+    gainer1 = gainers[0]['ticker']
+    gainer1_price = gainers[0]['price']
+    gainer1_change = gainers[0]['changesPercentage']
+    gainer1_name = gainers[0]['companyName']
 
-    gainer2 = gainers.iloc[1]['Name']
-    gainer2_price = gainers.iloc[1]['Price (Intraday)']
-    gainer2_change = gainers.iloc[1]['% Change']
 
-    gainer3 = gainers.iloc[3]['Name']
-    gainer3_price = gainers.iloc[3]['Price (Intraday)']
-    gainer3_change = gainers.iloc[3]['% Change']
+    gainer2 = gainers[1]['ticker']
+    gainer2_price = gainers[1]['price']
+    gainer2_change = gainers[1]['changesPercentage']
+    gainer2_name = gainers[1]['companyName']
 
-    gainer4 = gainers.iloc[4]['Name']
-    gainer4_price = gainers.iloc[4]['Price (Intraday)']
-    gainer4_change = gainers.iloc[4]['% Change']
+    gainer3 = gainers[2]['ticker']
+    gainer3_price = gainers[2]['price']
+    gainer3_change = gainers[2]['changesPercentage']
+    gainer3_name = gainers[2]['companyName']
 
-    gainer5 = gainers.iloc[5]['Name']
-    gainer5_price = gainers.iloc[5]['Price (Intraday)']
-    gainer5_change = gainers.iloc[5]['% Change']
+    gainer4 = gainers[3]['ticker']
+    gainer4_price = gainers[3]['price']
+    gainer4_change = gainers[3]['changesPercentage']
+    gainer4_name = gainers[3]['companyName']
+
+    gainer5 = gainers[4]['ticker']
+    gainer5_price = gainers[4]['price']
+    gainer5_change = gainers[4]['changesPercentage']
+    gainer5_name = gainers[4]['companyName']
 
 
     francois = Francois.objects.all()
@@ -397,6 +403,11 @@ def lifestyle(request):
         'gainer3_change':gainer3_change,
         'gainer4_change':gainer4_change,
         'gainer5_change':gainer5_change,
+        'gainer1_name':gainer1_name,
+        'gainer2_name':gainer2_name,
+        'gainer3_name':gainer3_name,
+        'gainer4_name':gainer4_name,
+        'gainer5_name':gainer5_name,
         'covid_name':covid_name,
         'covid_url':covid_url,
         'covid_image':covid_image,
@@ -405,7 +416,7 @@ def lifestyle(request):
         'lifestyle_name':lifestyle_name,
         'lifestyle_url': lifestyle_url,
         'lifestyle_image':lifestyle_image,
-        'lifestyle_description':lifestyle_description,
+        # 'lifestyle_description':lifestyle_description,
         'lifestyle_source':lifestyle_source,
         'opinion_name':opinion_name,
         'opinion_url':opinion_url,

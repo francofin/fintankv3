@@ -29,127 +29,101 @@
     </div>
     <!-- ********** Hero Area End ********** -->
 
-    <div class="main-content-wrapper section-padding-150">
+    <div class="main-content-wrapper section-padding-100">
         <div class="container">
             <div class="row justify-content-center">
                 <!-- ============= Post Content Area ============= -->
 
                 <div class="col-12 col-lg-12">
-
-
-               <div class="row justify-content-md-center row-eq-height">
-
-                 <div class="jumbotron">
-                   <h1 class="display-4">Industry Research & Screener</h1>
-                   <p class="lead">Industry grouping is based on a subset of the Industry's Universe based on stocks from the S&P 500, Dow Jones Industrial Average and the Nasdaq Composite.</p>
-                   <hr class="my-4">
-
-                   <div class="row">
-                     <form action="{% url 'screener' %}"class="form-inline my-2 my-lg-0" method='POST'>
-                       {% csrf_token %}
-                   <div class = "col-md-6">
-                     <p>Please select an Industry Below.</p>
-                         <div class="input-group mb-3">
-                       <div class="input-group-prepend">
-                         <button class="btn btn-secondary" type="submit" name='option'>Search</button>
-                       </div>
-                       <select name ='option' class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-                         <option value=''>Choose </option>
-                         <option value="Healthcare">Healthcare</option>
-                         <option value="Technology">Technology</option>
-                         <option value="Industrials">Industrials</option>
-                         <option value="Utilities">Utilities</option>
-                         <option value="Consumer Cyclical">Consumer Discretionary</option>
-                         <option value="Financial">Financials</option>
-                         <option value="Basic Materials">Basic Materials</option>
-                         <option value="Consumer Defensive">Consumer Staples</option>
-                         <option value="Communication Services">Communication</option>
-                         <option value="Real Estate">Real Estate</option>
-                         <option value="Energy">Energy</option>
-                         <option value="ETFs">ETFs</option>
-                       </select>
-                     </div>
-                   </div>
-                   <div class="col-md-6">
-                     <p>Please specify a Market Capital</p>
-                     <div class="input-group mb-3">
-                       <select name ='option2' class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-                         <option value=''>Choose</option>
-                         <option value="200000000000">Mega Cap</option>
-                         <option value="10000000000">Large Cap</option>
-                         <option value="2000000000">Mid Cap</option>
-                         <option value="300000000">Small Cap</option>
-                         <option value="50000000">Micro Cap</option>
-                       </select>
-                     </div>
-                  </form>
-                 </div>
-
-                </div>
-
-
-                <div class="col-12 col-lg-12">
                     <div class="single-blog-content mb-100">
                         <!-- Post Meta -->
-                        <div class="post-meta" style="padding-top: 20px;">
-                          <h5> Sector Performances</h5>
+                        <div class="post-meta">
+                          <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item">
+                                  <a href="{% url 'index'%}">
+                                    <i class="fas fa-home"></i> Home</a> &nbsp; &nbsp; &nbsp; | {{ ticker_name | safe }} &nbsp; |  YTD: {{ ytd | safe }}  &nbsp; |  Beta: {{ beta | safe }} &nbsp; |  Price: ${{ live_price | safe }} &nbsp; |  Sector: {{ sector | safe }} &nbsp; |  Exchange: {{ ticker_exchange | safe }}
+                              </li>
+                            </ol>
+                          </nav>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
-                          {{ script6 | safe }}
-                          {{ div6 | safe }}
-                          <div class="post-meta" style="padding-top: 50px;">
+                            {{ script1 | safe }}
+                            {{ div1 | safe }}
+                            {{ ticker_info | safe }}
+                        </div>
+                    </div>
+                </div>
 
-                            <h5>Search Results:
-                                {% if sector %}
-                                 {{ sector | safe}}, Showing: {{ length | safe }}
-                                 {% else %}
-                                  {{ length | safe }}</h5>
-                            {% endif %}
-                          </div>
-                          {% if output_for_stocks %}
-                          <table class="table">
-                            <thead class="thead-dark">
-                              <tr>
-                                <th scope="col">Ticker</th>
-                                <th scope="col">Company Name</th>
-                                <th scope="col">Market Cap</th>
-                                <th scope="col">Sector</th>
-                                <th scope="col">Industry</th>
-                                <th scope="col">Beta</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Last Annual Dividend</th>
-                                <th scope="col">Volume</th>
-                                <th scope="col">Exchange</th>
-                                <th scope="col">Exchange Short Name</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {% for item in output_for_stocks %}
-                              <tr>
-                                <th scope='row'><a href="{% url 'stock_item' item.symbol %}" id="search_item" target="_blank">{{ item.symbol }}</a></th>
-                                <td>{{ item.companyName }}</td>
-                                <td>{{ item.marketCap }}</td>
-                                <td>{{ item.sector }}</td>
-                                <td>{{ item.industry }}</td>
-                                <td>{{ item.beta }}</td>
-                                <td>{{ item.price }}</td>
-                                <td>{{ item.lastAnnualDividend }}</td>
-                                <td>{{ item.volume }}</td>
-                                <td>{{ item.exchange }}</td>
-                                <td>{{ item.exchangeShortName }}</td>
-                              </tr>
-                              {% endfor %}
-                            </tbody>
-                          </table>
+
+                <div class="col-12 col-lg-8">
+                    <div class="single-blog-content mb-100">
+                        <!-- Post Meta -->
+                        <div class="post-meta">
+                            <p>{{ ticker_name | safe }} Characteristic Rankings</p>
+                        </div>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                          {{ script2 | safe }}
+                          {{ div2 | safe }}
+                          {{ script3 | safe }}
+                          {{ div3 | safe }}
+                          {{ script4 | safe }}
+                          {{ div4 | safe }}
+                          {{ script5 | safe }}
+                          {{ div5 | safe }}
+                          {{ script7 | safe }}
+                          {{ div7 | safe }}
+                          {% if message %}
+                            {{ message }}
                           {% endif %}
                         </div>
                     </div>
                 </div>
 
+
                 <!-- ========== Sidebar Area ========== -->
+                <div class="col-12 col-md-8 col-lg-4">
+                    <div class="post-sidebar-area mb-100">
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">{{ticker_name|safe}}</h5>
+                            <div class="widget-content">
+                                <p>{{profile|safe}}</p>
+                            </div>
+                        </div>
+                        <!-- Widget Area -->
+                        <!-- Widget Area -->
+                        <!-- Widget Area -->
+                        <div class="sidebar-widget-area">
+                            <h5 class="title">Today’s Pick</h5>
+                            <div class="widget-content">
+                                <!-- Single Blog Post -->
+                                <div class="single-blog-post todays-pick">
+                                    <!-- Post Thumbnail -->
+                                    <div class="post-thumbnail">
+                                        <img src="{{ image | safe }}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area ============= -->
 
+                <div class="col-12 col-lg-12">
+                          <h6>Analyst Recommendations</h6>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                          {{ script8 | safe }}
+                          {{ div8 | safe }}
+                        </div>
+                </div>
+        </div>
 
             <!-- ============== Related Post ============== -->
             <div class="row">
@@ -158,7 +132,7 @@
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img style="max-height: 190px; min-height:190px; min-width: 350px; max-width:470px;" src="{{article1_image|safe}}" alt="">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article1_image|safe}}" alt="">
                             <!-- Catagory -->
                         </div>
                         <!-- Post Content -->
@@ -179,7 +153,7 @@
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img style="max-height: 190px; min-height:190px; min-width: 350px; max-width:470px;" src="{{article2_image|safe}}" alt="">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article2_image|safe}}" alt="">
                             <!-- Catagory -->
                         </div>
                         <!-- Post Content -->
@@ -200,7 +174,7 @@
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img style="max-height: 190px; min-height:190px; min-width: 350px; max-width:470px;" src="{{article3_image|safe}}" alt="">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article3_image|safe}}" alt="">
                             <!-- Catagory -->
                             <!-- Video Button -->
                         </div>
@@ -223,7 +197,7 @@
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img style="max-height: 190px; min-height:190px; min-width: 350px; max-width:470px;" src="{{article4_image|safe}}" alt="">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article4_image|safe}}" alt="">
                             <!-- Catagory -->
                         </div>
                         <!-- Post Content -->
@@ -244,7 +218,7 @@
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img style="max-height: 190px; min-height:190px; min-width: 350px; max-width:470px;" src="{{article5_image|safe}}" alt="">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article5_image|safe}}" alt="">
                             <!-- Catagory -->
                         </div>
                         <!-- Post Content -->
@@ -265,7 +239,7 @@
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img style="max-height: 190px; min-height:190px; min-width: 350px; max-width:470px;" src="{{article6_image|safe}}" alt="">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article6_image|safe}}" alt="">
                             <!-- Catagory -->
                         </div>
                         <!-- Post Content -->
@@ -287,7 +261,7 @@
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img style="max-height: 190px; min-height:190px; min-width: 350px; max-width:470px;" src="{{article7_image|safe}}" alt="">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article7_image|safe}}" alt="">
                             <!-- Catagory -->
                         </div>
                         <!-- Post Content -->
@@ -308,7 +282,7 @@
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img style="max-height: 190px; min-height:190px; min-width: 350px; max-width:470px;" src="{{article8_image|safe}}" alt="">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article8_image|safe}}" alt="">
                             <!-- Catagory -->
                         </div>
                         <!-- Post Content -->
@@ -329,7 +303,7 @@
                     <div class="single-blog-post">
                         <!-- Post Thumbnail -->
                         <div class="post-thumbnail">
-                            <img style="max-height: 190px; min-height:190px; min-width: 350px; max-width:470px;" src="{{article9_image|safe}}" alt="">
+                            <img style="max-height: 170px; min-height:170px; min-width: 350px; max-width:350px;" src="{{article9_image|safe}}" alt="">
                             <!-- Catagory -->
                         </div>
                         <!-- Post Content -->
@@ -345,10 +319,19 @@
                     </div>
                 </div>
             </div>
-            </div>
-          </div>
+            <div class="row justify-content-center">
+                <!-- ============= Post Content Area ============= -->
+
+                <div class="col-12 col-lg-12">
+                          <h6>Sector Performance</h6>
+                        <!-- Post Content -->
+                        <div class="post-content">
+                            {{ script6 | safe }}
+                            {{ div6 | safe }}
+                        </div>
+                </div>
+        </div>
     </div>
-  </div>
   </div>
 
     <!-- ***** Footer Area Start ***** -->

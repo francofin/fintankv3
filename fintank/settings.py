@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = 'dashboard'
 
 # Application definition
 
@@ -39,7 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pages.apps.PagesConfig',
     'research.apps.ResearchConfig',
+    'screener.apps.ScreenerConfig',
+    'investorprofile.apps.InvestorprofileConfig',
+    'lifestyle.apps.LifestyleConfig',
+    'stock_search.apps.StockSearchConfig',
     'ckeditor',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    #Providers
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +146,13 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+SITE_ID = 1
+#email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'finapptank@gmail.com'
+EMAIL_HOST_PASSWORD = 'Whalburger89'
+EMAIL_USE_TLS = True
