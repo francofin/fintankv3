@@ -3,6 +3,7 @@ from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from .models import Portfolio
 # Create your views here.
 def register_user(request):
     if request.method=='POST':
@@ -41,8 +42,45 @@ def register_user(request):
         return render(request, 'pages/register.html')
 
 
+def add_to_portfolio(request):
+    if request.method == 'POST':
+        user_id = request.POST['user_id']
+        ticker = request.POST['ticker']
+
+        portfolio = Portfolio(user_id = user_id, ticker=ticker)
+        portfolio.save()
+        messages.success(request, str(ticker)+' Has been Successfully Added to Your Portfolio')
+        return redirect('/research/')
+
+
 def login(request):
+    if request.method=='POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            messages.success(request, 'You Are Successfully Logged In! Welcome')
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Invalid LogIn Credentials')
+            return redirect('login')
     return render(request, 'pages/login.html')
 
+def logout(request):
+    if request.method=='POST':
+        auth.logout(request)
+        return redirect('login')
+    return redirect('login')
+
+@login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'pages/dashboard.html')
+    user_stocks = Portfolio.objects.all().filter(user_id=request.user.id)
+    # user_lifestyle = LifestyleDashboard.object.all().filter(user_id=request.user.id)
+
+    stocks = {
+        'user_stocks': user_stocks
+    }
+    return render(request, 'pages/dashboard.html', stocks)

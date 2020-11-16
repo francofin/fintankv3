@@ -20,9 +20,6 @@
                               <a class="nav-link"
                               href="{% url 'index' %}">Home</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Portfolio</a>
-                            </li>
                             <li
                                 {% if 'research' in request.path %}
                                 class="nav-item active"
@@ -69,6 +66,29 @@
                                 class="nav-link"
                                  href="{% url 'contact' %}">Contact</a>
                             </li>
+                            {% if user.is_authenticated %}
+                            <li
+                                {% if 'dashboard' in request.path %}
+                                class="nav-item active"
+                                {% else %}
+                                class="nav-item"
+                                {% endif %}>
+                                <a class="nav-link" href="{% url 'dashboard' %}">Portfolio</a>
+                            </li>
+                            <li {% if 'logout' in request.path %}
+                                class="nav-item active"
+                                {% else %}
+                                class="nav-item"
+                                {% endif %}>
+                                <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
+                                  Logout
+                                </a>
+                                  <form action="{% url 'logout' %}" id = "logout" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden">
+                                  </form>
+                              </li>
+                              {% else %}
                             <li
                                 {% if 'login' in request.path %}
                                 class="nav-item active"
@@ -89,6 +109,7 @@
                                 class="nav-link"
                                  href="{% url 'register_user' %}">Register</a>
                             </li>
+                            {% endif %}
                         </ul>
                         <!-- Search Form  -->
                         <div id="search-wrapper">

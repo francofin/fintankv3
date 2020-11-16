@@ -96,7 +96,6 @@
                         <!-- Widget Area -->
                         <!-- Widget Area -->
                         <div class="sidebar-widget-area">
-                            <h5 class="title">Today’s Pick</h5>
                             <div class="widget-content">
                                 <!-- Single Blog Post -->
                                 <div class="single-blog-post todays-pick">
@@ -104,6 +103,17 @@
                                     <div class="post-thumbnail">
                                         <img src="{{ image | safe }}" alt="">
                                     </div>
+                                    <div class="">
+                                      <form action="{% url 'add_to_portfolio' %}" class="search-form" method='POST'>
+                                      {% csrf_token %}
+                                      {% if user.is_authenticated %}
+                                        <input type="hidden" class="form-control" name='user_id' value="{{ user.id }}">
+                                        <input type="hidden" class="form-control" name = 'ticker' value="{{ ticker_request }}">
+                                        <button class="btn btn-secondary py-3 px-5" name="button"><h5>Add To Watchlist</h5></button>
+                                        {% endif %}
+                                    </form>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
