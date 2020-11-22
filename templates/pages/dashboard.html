@@ -48,62 +48,39 @@
                    <h1 class="display-4">Stocks On Your WatchList</h1>
                    <p class="lead">Coming Soon, Build a backtest of stocks on your watchlist to see how your portfolio would have performed against major indices. </p>
                    <hr class="my-4">
-                   {% if user_stocks %}
-                   {% for stock in user_stocks %}
-                   <h3>{{stock.ticker}}</h3>
-                   {% endfor %}
-                   {% endif %}
                    <div class="row">
                      <div class="col-12 col-lg-12">
                          <div class="single-blog-content mb-100">
                              <!-- Post Meta -->
-                             <div class="post-meta" style="padding-top: 20px;">
-                               <h5> Sector Performances</h5>
-                             </div>
                              <!-- Post Content -->
                              <div class="post-content">
-                               {{ script6 | safe }}
-                               {{ div6 | safe }}
-                               <div class="post-meta" style="padding-top: 50px;">
-
-                                 <h5>Search Results:
-                                     {% if sector %}
-                                      {{ sector | safe}}, Showing: {{ length | safe }}
-                                      {% else %}
-                                       {{ length | safe }}</h5>
-                                 {% endif %}
-                               </div>
-                               {% if output_for_stocks %}
+                               {% if batch %}
                                <table class="table">
                                  <thead class="thead-dark">
                                    <tr>
                                      <th scope="col">Ticker</th>
                                      <th scope="col">Company Name</th>
-                                     <th scope="col">Market Cap</th>
-                                     <th scope="col">Sector</th>
-                                     <th scope="col">Industry</th>
-                                     <th scope="col">Beta</th>
-                                     <th scope="col">Price</th>
-                                     <th scope="col">Last Annual Dividend</th>
+                                     <th scope="col">$ Price</th>
+                                     <th scope="col">Percent Change</th>
+                                     <th scope="col">50 Day Average</th>
+                                     <th scope="col">200 Day Average</th>
                                      <th scope="col">Volume</th>
                                      <th scope="col">Exchange</th>
-                                     <th scope="col">Exchange Short Name</th>
+                                     <th scope="col">P/E</th>
                                    </tr>
                                  </thead>
                                  <tbody>
-                                   {% for item in output_for_stocks %}
+                                   {% for item in batch %}
                                    <tr>
                                      <th scope='row'><a href="{% url 'stock_item' item.symbol %}" id="search_item" target="_blank">{{ item.symbol }}</a></th>
-                                     <td>{{ item.companyName }}</td>
-                                     <td>{{ item.marketCap }}</td>
-                                     <td>{{ item.sector }}</td>
-                                     <td>{{ item.industry }}</td>
-                                     <td>{{ item.beta }}</td>
-                                     <td>{{ item.price }}</td>
-                                     <td>{{ item.lastAnnualDividend }}</td>
+                                     <td>{{ item.name }}</td>
+                                     <td>${{ item.price }}</td>
+                                     <td>{{ item.changesPercentage }}%</td>
+                                     <td>${{ item.priceAvg50 }}</td>
+                                     <td>${{ item.priceAvg200 }}</td>
                                      <td>{{ item.volume }}</td>
                                      <td>{{ item.exchange }}</td>
-                                     <td>{{ item.exchangeShortName }}</td>
+                                     <td>{{ item.pe }}</td>
                                    </tr>
                                    {% endfor %}
                                  </tbody>
