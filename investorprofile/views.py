@@ -3,7 +3,11 @@ from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Portfolio
+from .models import Portfolio, Portfolio_2
+from .forms import PortfolioForm
+from django import template
+
+register = template.Library()
 # Create your views here.
 def register_user(request):
     if request.method=='POST':
@@ -40,17 +44,34 @@ def register_user(request):
                 return redirect('register_user')
     else:
         return render(request, 'pages/register.html')
+#
+# @login_required(login_url='login')
+# def add_to_portfolio(request):
+#     if request.method == 'POST':
+#         user_id = request.POST['user_id']
+#         ticker = request.POST['ticker']
+#
+#         portfolio = Portfolio(user_id = user_id, ticker=ticker)
+#         portfolio.save()
+#         messages.success(request, str(ticker)+' Has been Successfully Added to Your Portfolio')
+#         return redirect('/research/')
 
 
+@login_required(login_url='login')
 def add_to_portfolio(request):
     if request.method == 'POST':
-        user_id = request.POST['user_id']
-        ticker = request.POST['ticker']
+        form = PortfolioForm(request.POST or None, request.user)
+        if form.is_valid():
+            ticker = form.save(commit=False)
+            ticker.user = request.user
+            ticker.save()
+            return redirect('/research/')
 
-        portfolio = Portfolio(user_id = user_id, ticker=ticker)
-        portfolio.save()
-        messages.success(request, str(ticker)+' Has been Successfully Added to Your Portfolio')
-        return redirect('/research/')
+@login_required(login_url='login')
+def delete_stock(request, stock_id):
+    item = Portfolio_2.objects.all().filter(user=request.user).filter(pk=stock_id)
+    item.delete()
+    return redirect('/investorprofile/dashboard')
 
 
 def login(request):
@@ -74,6 +95,8 @@ def logout(request):
         auth.logout(request)
         return redirect('login')
     return redirect('login')
+
+
 
 @login_required(login_url='login')
 def dashboard(request):
@@ -138,25 +161,27 @@ def dashboard(request):
         return ret_arr, vol_arr, sharpe_arr, format(max_sharpe, ".2f"), str(format(max_sr_ret *100, ".2f")) +"%", str(format(best_vol*100, ".2f")) +"%", best_weights
 
 
-    user_stocks = Portfolio.objects.all().filter(user_id=request.user.id)
+    # user_stocks = Portfolio_2.objects.all().filter(user_id=request.user.id)
+    user_stocks = Portfolio_2.objects.all().filter(user=request.user)
     user_portfolio = []
     #for the price data
-    data_list = []
+    # data_list = []
     for stock in user_stocks:
         user_portfolio.append(str(stock))
 
     batch = json.loads(requests.get(f' https://fmpcloud.io/api/v3/quote/'+','.join(user_portfolio)+'?apikey=3da6aaea4ffa4232c7ada6b09e15af62').content)
-    prices = get_prices(user_portfolio)
-    prices_df = make_portfolio_df(prices, user_portfolio)
-    log_returns = log_return(prices_df)
-    mean_returns = log_returns.mean()
-    annualized_returns = mean_returns.mean()* 252
-    cov_df = cov_table(prices_df) * 252
-    return_array, volatility_array, sharpe_array, max_sharpe_ratio, max_sharpe_return, best_volatility, port_weights = monte_carlo_sim(mean_returns, cov_df, user_portfolio)
+
+    # prices = get_prices(user_portfolio)
+    # prices_df = make_portfolio_df(prices, user_portfolio)
+    # log_returns = log_return(prices_df)
+    # mean_returns = log_returns.mean()
+    # annualized_returns = mean_returns.mean()* 252
+    # cov_df = cov_table(prices_df) * 252
+    # return_array, volatility_array, sharpe_array, max_sharpe_ratio, max_sharpe_return, best_volatility, port_weights = monte_carlo_sim(mean_returns, cov_df, user_portfolio)
 
     stocks = {
         'user_stocks': user_stocks,
         'user_portfolio':user_portfolio,
-        'batch':batch
+        'batch':batch,
     }
     return render(request, 'pages/dashboard.html', stocks)

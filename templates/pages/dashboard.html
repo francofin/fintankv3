@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load investor_extras %}
 {% block content %}
 
     <!-- Preloader Start -->
@@ -54,7 +55,7 @@
                              <!-- Post Meta -->
                              <!-- Post Content -->
                              <div class="post-content">
-                               {% if batch %}
+                               {% if user_stocks %}
                                <table class="table">
                                  <thead class="thead-dark">
                                    <tr>
@@ -67,12 +68,13 @@
                                      <th scope="col">Volume</th>
                                      <th scope="col">Exchange</th>
                                      <th scope="col">P/E</th>
+                                     <th scope="col">Remove From Portfolio</th>
                                    </tr>
                                  </thead>
                                  <tbody>
-                                   {% for item in batch %}
+                                   {% for item, stockid in batch|zip:user_stocks %}
                                    <tr>
-                                     <th scope='row'><a href="{% url 'stock_item' item.symbol %}" id="search_item" target="_blank">{{ item.symbol }}</a></th>
+                                     <th scope='row'><a href="" id="search_item" target="_blank">{{ item.symbol }}</a></th>
                                      <td>{{ item.name }}</td>
                                      <td>${{ item.price }}</td>
                                      <td>{{ item.changesPercentage }}%</td>
@@ -81,6 +83,9 @@
                                      <td>{{ item.volume }}</td>
                                      <td>{{ item.exchange }}</td>
                                      <td>{{ item.pe }}</td>
+                                     <td>
+                                        <a href="{% url 'delete_stock' stockid.id %}" >Delete Stock</a>
+                                     </td>
                                    </tr>
                                    {% endfor %}
                                  </tbody>
