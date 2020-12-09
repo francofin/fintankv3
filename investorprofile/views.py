@@ -101,6 +101,10 @@ def logout(request):
 @login_required(login_url='login')
 def dashboard(request):
     import pandas as pd
+    import numpy as np
+    from scipy.optimize import minimize
+    from scipy import stats
+    from scipy.stats import norm
     import requests
     import json
 
@@ -123,7 +127,7 @@ def dashboard(request):
         return output
 
     def price_normalization(dataframe):
-        norm_price = (dataframe / dataframe.shift(1))
+        norm_price = (dataframe / dataframe.shift(1)) -1
         return norm_price.dropna()
 
     def log_return(dataframe):
@@ -160,6 +164,26 @@ def dashboard(request):
 
         return ret_arr, vol_arr, sharpe_arr, format(max_sharpe, ".2f"), str(format(max_sr_ret *100, ".2f")) +"%", str(format(best_vol*100, ".2f")) +"%", best_weights
 
+    def get_ret_vol_sr(w_array):
+        weight = np.array(w_array)
+        ret = np.sum(annualized_returns * weight)
+        vol = np.sqrt(np.dot(weight.T, np.dot(cov_df, weight)))
+        sr = ret / vol
+        return ret, vol, sr
+
+    def minimize_function(w_array, a_list, r_table_mean, r_cov):
+
+        def neg_sharpe(w):
+            return  get_ret_vol_sr(w)[2] * -1
+
+        cons = ({'type': 'eq', 'fun': lambda x: np.sum(x) - 1})
+        bound = ((0, 1),) * len(a_list)
+        init_guess = w_array
+        opt_results = minimize(neg_sharpe, init_guess, method='SLSQP', bounds=bound, constraints=cons)
+        ret = get_ret_vol_sr(opt_results.x)[0]*100
+        vol = get_ret_vol_sr(opt_results.x)[1]*100
+        sr = get_ret_vol_sr(opt_results.x)[2]
+        return str(format(ret, ".2f")) +"%", str(format(vol, ".2f")) +"%", str(format(sr, ".2f"))+"%", opt_results.x
 
     # user_stocks = Portfolio_2.objects.all().filter(user_id=request.user.id)
     user_stocks = Portfolio_2.objects.all().filter(user=request.user)
@@ -171,17 +195,30 @@ def dashboard(request):
 
     batch = json.loads(requests.get(f' https://fmpcloud.io/api/v3/quote/'+','.join(user_portfolio)+'?apikey=3da6aaea4ffa4232c7ada6b09e15af62').content)
 
-    # prices = get_prices(user_portfolio)
-    # prices_df = make_portfolio_df(prices, user_portfolio)
-    # log_returns = log_return(prices_df)
-    # mean_returns = log_returns.mean()
-    # annualized_returns = mean_returns.mean()* 252
-    # cov_df = cov_table(prices_df) * 252
-    # return_array, volatility_array, sharpe_array, max_sharpe_ratio, max_sharpe_return, best_volatility, port_weights = monte_carlo_sim(mean_returns, cov_df, user_portfolio)
-
-    stocks = {
+    prices = get_prices(user_portfolio)
+    if len(user_portfolio) != 0:
+        prices_df = make_portfolio_df(prices, user_portfolio)
+        log_returns = log_return(prices_df)
+        mean_returns = log_returns.mean()
+        annualized_returns = mean_returns* 252
+        cov_df = cov_table(prices_df) * 252
+        return_array, volatility_array, sharpe_array, max_sharpe_ratio, max_sharpe_return, best_volatility, port_weights = monte_carlo_sim(mean_returns, cov_df, user_portfolio)
+        stocks = {
+            'user_stocks': user_stocks,
+            'user_portfolio':user_portfolio,
+            'batch':batch,
+            'return_array': return_array,
+            'volatility_array':volatility_array,
+            'sharpe_array':sharpe_array,
+            'max_sharpe_ratio':max_sharpe_ratio,
+            'port_weights':port_weights
+                }
+        # weight_array = port_weights
+        # minimized_ret, minimized_vol, minimized_sr, optimum_weights = minimize_function(sum_to_one_weights, user_portfolio, annualized_returns, cov_df)
+    else:
+        stocks = {
         'user_stocks': user_stocks,
         'user_portfolio':user_portfolio,
         'batch':batch,
-    }
+            }
     return render(request, 'pages/dashboard.html', stocks)

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import html5lib
+from research.market_indices import all_ratios
 from yahoo_fin.stock_info import *
 from yahoo_fin.options import *
 
@@ -71,6 +72,9 @@ def research(request):
     tsx = json.loads(requests.get(f'https://fmpcloud.io/api/v3/symbol/available-tsx?apikey=3da6aaea4ffa4232c7ada6b09e15af62').content)
     euro = json.loads(requests.get(f'https://fmpcloud.io/api/v3/symbol/available-euronext?apikey=3da6aaea4ffa4232c7ada6b09e15af62').content)
     sp500 = json.loads(requests.get(f'https://fmpcloud.io/api/v3/sp500_constituent?apikey=3da6aaea4ffa4232c7ada6b09e15af62').content)
+
+    ratios_for_analysis = all_ratios
+
     # get random ticker function
     def get_ticker(exchange):
         ticker_list = []
@@ -100,6 +104,11 @@ def research(request):
     date_2 = str(d2)
     symbol_chart = (pd.DataFrame(json.loads(requests.get(f'https://fmpcloud.io/api/v3/historical-price-full/'+str(ticker_request)+'?from='+date_2+'&to='+end_date+'&apikey='+api).content)['historical']).set_index('date').iloc[::-1])
     # Table information
+    # json_results = []
+    # raw_data = json.loads(requests.get(f'https://fmpcloud.io/api/v3/historical-price-full/'+str(ticker_request)+'?from='+date_2+'&to='+end_date+'&apikey='+api).content)['historical']
+    # for item in raw_data:
+    #     json_results.append(item)
+    # json_data = json_results[0:10]
     dataframe = (pd.DataFrame(json.loads(requests.get(f'https://fmpcloud.io/api/v3/historical-price-full/'+str(ticker_request)+'?from='+date_2+'&to='+end_date+'&apikey='+api).content)['historical']).set_index('date'))[[ 'close', 'volume', 'change', 'changePercent']].head(10)
     dataframe_clean = dataframe.rename(columns={'close':'Close', 'volume':'Volume', 'change':'$Change', 'changePercent':'Daily Change %'})
     ticker_info = dataframe_clean.sort_values(by=['date'], ascending=False).style.format('{:,.2f}').set_table_attributes("class='table table-sm table-striped table-bordered table-hover'").render()
