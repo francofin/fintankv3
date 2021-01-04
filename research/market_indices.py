@@ -1,6 +1,6 @@
 import pandas as pd
 import json
-import requests 
+import requests
 
 api = '3da6aaea4ffa4232c7ada6b09e15af62'
 sp500 = json.loads(requests.get(f'https://fmpcloud.io/api/v3/sp500_constituent?apikey=3da6aaea4ffa4232c7ada6b09e15af62').content)
@@ -10,6 +10,9 @@ while sp_index < len(sp500):
     symbol = sp500[sp_index]['symbol']
     s_p_tickers.append(symbol)
     sp_index+=1
+s_p_tickers.pop(418)
+s_p_tickers.pop(437)
+s_p_tickers.pop(447)
 
 
 def get_ratios(ticker_list):
@@ -28,3 +31,4 @@ def get_ratios(ticker_list):
 
 
 all_ratios = get_ratios(s_p_tickers)
+ranked_ratios = all_ratios[['dividendYielPercentageTTM', 'peRatioTTM', 'pegRatioTTM', 'currentRatioTTM', 'cashRatioTTM','daysOfInventoryOutstandingTTM', 'daysOfPayablesOutstandingTTM', 'grossProfitMarginTTM', 'operatingProfitMarginTTM','netProfitMarginTTM', 'returnOnEquityTTM', 'returnOnCapitalEmployedTTM', 'ebitPerRevenueTTM', 'debtRatioTTM', 'debtEquityRatioTTM', 'totalDebtToCapitalizationTTM', 'interestCoverageTTM', 'cashFlowToDebtRatioTTM', 'inventoryTurnoverTTM', 'operatingCashFlowPerShareTTM', 'operatingCashFlowSalesRatioTTM', 'cashFlowCoverageRatiosTTM', 'shortTermCoverageRatiosTTM', 'priceToBookRatioTTM', 'priceToSalesRatioTTM','priceEarningsRatioTTM', 'priceToFreeCashFlowsRatioTTM', 'priceCashFlowRatioTTM', 'dividendYieldTTM', 'enterpriseValueMultipleTTM']]
