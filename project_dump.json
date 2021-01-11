@@ -1,0 +1,476 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$180000$3hWFGVEfDMSc$qz8e1iTfF2LXkyVsDiKJuWgsxvSfJszUFTxIjDCg5NI=",
+        "last_login": "2020-11-22T20:43:21.613Z",
+        "is_superuser": true,
+        "username": "francofintank",
+        "first_name": "",
+        "last_name": "",
+        "email": "francoiskieran89@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2020-09-27T16:57:27.609Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$180000$95pw49iYP4Rl$sQl17ii0XNZ2RS5XBSC2WuisM4+eJUiYksAitcYYXVw=",
+        "last_login": "2020-11-22T20:44:55.512Z",
+        "is_superuser": false,
+        "username": "fintank",
+        "first_name": "Francois",
+        "last_name": "Jack",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2020-11-22T20:44:55.372Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$180000$lS5U5GZkpYnN$lf0wcpRGWSXIMVmLbn6wuonHZHTTnJcDOtlE8ukcx7g=",
+        "last_login": "2020-12-05T17:15:22.650Z",
+        "is_superuser": false,
+        "username": "sabcois",
+        "first_name": "Sabrin",
+        "last_name": "Brown",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2020-12-05T17:15:22.330Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "sfjnjq7q3aj0va8m5a9331h4llz5jzps",
+    "fields": {
+        "session_data": "NDA0ODEwNzE1ODQ5YjU5OGZlY2QxMjk0ZDJiOGRkMjhhMmFiYzQyMDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjODM1ZjNjZDI0ZTU3NzFjNDY1ZWE2NDI4MzJmODZiOGFjYTQ5MTE5In0=",
+        "expire_date": "2020-10-11T17:29:21.729Z"
+    }
+},
+{
+    "model": "pages.francois",
+    "pk": 2,
+    "fields": {
+        "first_name": "Francois Jack",
+        "designation": "CEO, MFin, CFA",
+        "about_para1": "<h6>FINTANK is created to provide cutting edge investment analysis techniques to the broad investment community.&nbsp;While our hope is that we can add value to your understanding of the market, we also seek to educate the investment community on quantitative topics in investment management, portfolio and market analysis.</h6>",
+        "about_me_side_bar": "<p>The toughest battle I have faced was against myself. The struggle to find meaning, the struggle to accept what is beyond my control, struggles to gain acceptance, find love, peace, happiness, wealth, success......&nbsp;<br />\r\nWith so much demand it becomes easy to forget our purpose, it becomes easy to lose sight of the true curiosity that progresses our humanity, yet we, myself included tend to remain in our imaginary bubbles that shields us from the world and beyond. Shields that prevent us from learning and sharing our knowledge with our community. I seek to break that shield, not for status or recognition, but for the purpose I truly believes it defines.</p>",
+        "about_blockquote": "<h6><strong>In these unprecedented times, we must continue to be vigilant, cautious and logical about our future. I truly belive&nbsp;that the purpose of mankind is to ensure our species operates with a going concern. Increasing conflict seeks to destroy everything we have achieved. Hope is our only logical reponse, hope that we continue to build on our achievements boasting equality, justice, morality and unity as the pillars for continued success.&nbsp;As difficult as it may be, Louis Nizer noted <em>&quot;I know of no higher fortitude than stubbornness in face of overwhelming odds&quot;</em>. It is always&nbsp;our time to shine, not as individuals but as humanity.</strong></h6>",
+        "about_short": "<p>FINTANK is created to provide cutting edge investment analysis techniques to the broad investment community. While our hope is that we can add value to your understanding of the market, we also seek to educate the investment community on quantitative topics in investment management, portfolio and market analysis.</p>",
+        "facebook_link": "https://www.facebook.com/",
+        "twitter_link": "https://twitter.com/?lang=en",
+        "instagram_link": "http://instagram.com",
+        "last_update": "2020-09-27T13:30:11Z",
+        "home_images1": "photos/2020/09/27/skyline_YLwLb98.jpg",
+        "home_images2": "photos/2020/09/27/brooklyn_Htoez2N.jpg",
+        "home_images3": "photos/2020/09/27/hong_kong_TB6Jq96.jpg",
+        "home_images4": "photos/2020/09/27/london_RfQ0Mgc.jpg",
+        "home_images5": "photos/2020/09/27/toronto2_PaFmNKF.jpg",
+        "home_images6": "photos/2020/09/27/sky2_W6XIbd1.jpg",
+        "home_images7": "photos/2020/09/27/toronto_ErSgA20.jpg",
+        "home_images8": "photos/2020/09/27/trinidad_JElIDRz.jpg",
+        "about_side_bar": "photos/2020/09/27/fj_r4rbkjl.jpg"
+    }
+},
+{
+    "model": "investorprofile.portfolio",
+    "pk": 1,
+    "fields": {
+        "user_id": 1,
+        "ticker": "EC.PA",
+        "add_date": "2020-11-15T19:47:45.823Z"
+    }
+},
+{
+    "model": "investorprofile.portfolio",
+    "pk": 2,
+    "fields": {
+        "user_id": 1,
+        "ticker": "EC.PA",
+        "add_date": "2020-11-15T19:48:04.800Z"
+    }
+},
+{
+    "model": "investorprofile.portfolio",
+    "pk": 3,
+    "fields": {
+        "user_id": 5,
+        "ticker": "CTMX",
+        "add_date": "2020-11-15T19:50:21.781Z"
+    }
+},
+{
+    "model": "investorprofile.portfolio",
+    "pk": 4,
+    "fields": {
+        "user_id": 4,
+        "ticker": "VRNA",
+        "add_date": "2020-11-15T21:29:12.312Z"
+    }
+},
+{
+    "model": "investorprofile.portfolio",
+    "pk": 5,
+    "fields": {
+        "user_id": 4,
+        "ticker": "FRGI",
+        "add_date": "2020-11-15T21:58:27.469Z"
+    }
+},
+{
+    "model": "investorprofile.portfolio",
+    "pk": 6,
+    "fields": {
+        "user_id": 6,
+        "ticker": "CETXP",
+        "add_date": "2020-11-15T21:59:47.231Z"
+    }
+},
+{
+    "model": "investorprofile.portfolio",
+    "pk": 7,
+    "fields": {
+        "user_id": 4,
+        "ticker": "AMZN",
+        "add_date": "2020-11-21T00:30:45.566Z"
+    }
+},
+{
+    "model": "sites.site",
+    "fields": {
+        "domain": "localhost:8000",
+        "name": "localhost:8000"
+    }
+},
+{
+    "model": "socialaccount.socialapp",
+    "pk": 1,
+    "fields": {
+        "provider": "facebook",
+        "name": "Facebook Login",
+        "client_id": "1265177533875057",
+        "secret": "1b594284ca08aa5ed0c9c1ed549ca89c",
+        "key": "",
+        "sites": [
+            [
+                "localhost:8000"
+            ]
+        ]
+    }
+},
+{
+    "model": "socialaccount.socialapp",
+    "pk": 2,
+    "fields": {
+        "provider": "google",
+        "name": "Google Login",
+        "client_id": "8793264868-8mvkbpl67kvscjhugo887rhrh21d502j.apps.googleusercontent.com",
+        "secret": "AgDpnFAM2A1mEu9Oqcj45aMV",
+        "key": "",
+        "sites": [
+            [
+                "localhost:8000"
+            ]
+        ]
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2020-09-27T17:39:30.513Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "pages",
+            "francois"
+        ],
+        "object_id": "2",
+        "object_repr": "Francois Jack",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2020-09-27T17:39:37.103Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "pages",
+            "francois"
+        ],
+        "object_id": "2",
+        "object_repr": "Francois Jack",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2020-09-27T17:58:19.007Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "pages",
+            "francois"
+        ],
+        "object_id": "2",
+        "object_repr": "Francois Jack",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"About para1\", \"About me side bar\", \"About blockquote\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2020-09-27T17:59:01.562Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "pages",
+            "francois"
+        ],
+        "object_id": "2",
+        "object_repr": "Francois Jack",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"About para1\", \"About blockquote\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2020-09-27T17:59:46.551Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "pages",
+            "francois"
+        ],
+        "object_id": "2",
+        "object_repr": "Francois Jack",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"About para1\", \"About blockquote\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2020-11-02T05:51:57.014Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "socialaccount",
+            "socialapp"
+        ],
+        "object_id": "1",
+        "object_repr": "Facebook Login",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2020-11-02T05:52:33.202Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "sites",
+            "site"
+        ],
+        "object_id": "1",
+        "object_repr": "localhost:8000",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Domain name\", \"Display name\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2020-11-02T05:59:11.980Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "socialaccount",
+            "socialapp"
+        ],
+        "object_id": "2",
+        "object_repr": "Google Login",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2020-11-22T16:06:08.373Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "investorprofile",
+            "portfolio_2"
+        ],
+        "object_id": "4",
+        "object_repr": "AMZN",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2020-11-22T20:43:53.166Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "object_id": "8",
+        "object_repr": "bella",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+        "action_time": "2020-11-22T20:43:53.168Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "object_id": "3",
+        "object_repr": "francois",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+        "action_time": "2020-11-22T20:43:53.169Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "object_id": "5",
+        "object_repr": "frank",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2020-11-22T20:43:53.170Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "object_id": "6",
+        "object_repr": "jab",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2020-11-22T20:43:53.171Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "object_id": "7",
+        "object_repr": "jack20",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2020-11-22T20:43:53.171Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "object_id": "2",
+        "object_repr": "jay20",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2020-11-22T20:43:53.172Z",
+        "user": [
+            "francofintank"
+        ],
+        "content_type": [
+            "auth",
+            "user"
+        ],
+        "object_id": "4",
+        "object_repr": "jayjo",
+        "action_flag": 3,
+        "change_message": ""
+    }
+}
+]
