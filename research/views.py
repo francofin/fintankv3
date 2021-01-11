@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import html5lib
-from research.market_indices import ranked_ratios
+# from research.market_indices import ranked_ratios
 from yahoo_fin.stock_info import *
 from yahoo_fin.options import *
 
